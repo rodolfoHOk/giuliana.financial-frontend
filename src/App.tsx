@@ -1,4 +1,22 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { ReportTransaction } from './model/report-transactions';
+
 function App() {
+  const [transactions, setTransactions] = useState<ReportTransaction[]>([]);
+
+  const fetchTransactions = async () => {
+    const response = await axios.get<ReportTransaction[]>(
+      'http://localhost:8080/transactions'
+    );
+
+    setTransactions(response.data);
+  };
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
   return (
     <main>
       <div>
@@ -32,16 +50,22 @@ function App() {
               </thead>
 
               <tbody>
-                <tr>
-                  <td>transaction.card</td>
-                  <td>transaction.cpf</td>
-                  <td>transaction.date</td>
-                  <td>transaction.storeOwner</td>
-                  <td>transaction.time</td>
-                  <td>transaction.storeName</td>
-                  <td>transaction.type</td>
-                  <td>transaction.amount</td>
-                </tr>
+                {transactions.map((report) => (
+                  <>
+                    {report.transactions.map((transaction) => (
+                      <tr key={transaction.id}>
+                        <td>{transaction.card}</td>
+                        <td>{transaction.cpf}</td>
+                        <td>{transaction.date}</td>
+                        <td>{transaction.storeOwner}</td>
+                        <td>{transaction.time}</td>
+                        <td>{transaction.storeName}</td>
+                        <td>{transaction.type}</td>
+                        <td>{transaction.amount}</td>
+                      </tr>
+                    ))}
+                  </>
+                ))}
               </tbody>
             </table>
           </li>
