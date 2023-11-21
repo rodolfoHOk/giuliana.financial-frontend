@@ -11,6 +11,7 @@
 - Typescript
 - React Js
 - Vite Js
+- Tailwind CSS
 
 ## Rodar
 
