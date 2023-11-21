@@ -13,8 +13,13 @@
 - Vite Js
 - Tailwind CSS
 
+## Imagens
+
+![print 01](public/print-screen-01.png)
+
 ## Rodar
 
-(to do)
-
-## Links
+- requisito: node js instalado
+- Clone o repositório
+- npm install
+- npm run dev
