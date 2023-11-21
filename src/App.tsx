@@ -40,7 +40,9 @@ function App() {
   return (
     <main className="bg-neutral-900 text-gray-200 flex flex-col w-full">
       <div className="mx-6 my-8 flex justify-center">
-        <h1 className="text-3xl font-bold">Transações financeiras</h1>
+        <h1 className="text-3xl font-bold text-yellow-600">
+          Transações financeiras
+        </h1>
       </div>
 
       <div className="mx-6 flex flex-col gap-2 bg-neutral-800 p-4 rounded">
@@ -90,7 +92,9 @@ function App() {
             >
               <div className="flex flex-col">
                 <div className="flex justify-between pb-2">
-                  <h3 className="font-bold text-lg">{report.storeName}</h3>
+                  <h3 className="font-bold text-lg text-yellow-600">
+                    {report.storeName}
+                  </h3>
 
                   <span className="font-bold text-sm">
                     {report.total >= 0 ? (
@@ -105,7 +109,7 @@ function App() {
                   </span>
                 </div>
 
-                <table className="flex flex-col">
+                <table className="flex flex-col gap-1">
                   <thead>
                     <tr className="w-full grid grid-cols-8">
                       <th className="flex justify-center">Cartão</th>
@@ -119,7 +123,7 @@ function App() {
                     </tr>
                   </thead>
 
-                  <tbody>
+                  <tbody className="flex flex-col gap-1">
                     {report.transactions.map((transaction) => (
                       <tr
                         className="w-full grid grid-cols-8 justify-center items-center text-sm odd:bg-neutral-800 even:bg-neutral-900 rounded-sm"
