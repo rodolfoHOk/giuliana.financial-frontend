@@ -4,9 +4,11 @@ import { BASE_URL } from '../constants/constants';
 
 export function CnabForm() {
   const [file, setFile] = useState<File | null>(null);
+  const [message, setMessage] = useState('');
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFile(event.target.files ? event.target.files[0] : null);
+    setMessage(event.target.files ? event.target.files[0].name : '');
   };
 
   const uploadFile = async () => {
@@ -14,11 +16,12 @@ export function CnabForm() {
     if (file) {
       formData.append('file', file);
     }
-    axios.post(`${BASE_URL}/cnab/upload`, formData, {
+    await axios.post(`${BASE_URL}/cnab/upload`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+    setMessage('processamento iniciado...');
   };
 
   return (
@@ -39,6 +42,7 @@ export function CnabForm() {
         </div>
 
         <button
+          type="button"
           disabled={!file?.name}
           className="bg-blue-800 px-3 py-2 rounded font-semibold hover:bg-blue-700 hover:cursor-pointer transition-colors disabled:bg-gray-700 disabled:cursor-not-allowed"
           onClick={uploadFile}
@@ -46,6 +50,10 @@ export function CnabForm() {
           Enviar arquivo
         </button>
       </form>
+
+      <div className="mt-2 text-green-600">
+        <span>{message}</span>
+      </div>
     </div>
   );
 }
